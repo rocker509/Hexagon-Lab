@@ -9,20 +9,38 @@
  */
 public class IrregularPolygon
 {       // for DrawingTool
-        private ArrayList <Point2D.Double> myPolygon;
-
+        private ArrayList <Point2D.Double> myPolygon = new ArrayList<>();
+        private SketchPad myPaper;
+        private DrawingTool myPencil;
         // constructors
-        public IrregularPolygon() { }
+        public IrregularPolygon() {
+            myPaper = new SketchPad(500, 500);
+            myPencil = new DrawingTool(myPaper);
+            ArrayList <Point2D.Double> myPolygon;
+        }
 
         // public methods
         public void add(Point2D.Double aPoint) {
-            
+            myPolygon.add(aPoint);
         }
 
-        public void draw() { }
-
+        public void draw() { 
+            myPencil.up();
+            myPencil.move(myPolygon.get(0).getX() , myPolygon.get(0).getY());
+            myPencil.down();
+            for(int z = 0; z < myPolygon.size() - 1; z++){
+                myPencil.move(myPolygon.get(z + 1).getX() , myPolygon.get(z + 1).getY());
+            }
+            myPencil.move(myPolygon.get(0).getX() , myPolygon.get(0).getY());
+        }
+        public String getName(){
+            return "Nate Huey";
+        }
         public double perimeter() { 
             int perm = 0;
+            if(myPolygon.size() <= 2){
+                return -1;
+            }
             for(int z = 0; z < myPolygon.size() - 1; z++){
                 perm += myPolygon.get(z).distance(myPolygon.get(z + 1));
             }
@@ -31,6 +49,9 @@ public class IrregularPolygon
 
         public double area() {
             int a = 0;
+            if(myPolygon.size() <= 2){
+                return -1;
+            }
             for(int z = 0; z < myPolygon.size() - 1; z++){
                 a += Math.abs(.5 * (myPolygon.get(z).getX() * myPolygon.get(z + 1).getY() + myPolygon.get(z).getY() * myPolygon.get(z + 1).getX()));
             }
