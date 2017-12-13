@@ -7,13 +7,13 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class IrregularPolygon
+public class N8 implements Polygon
 {       // for DrawingTool
         private ArrayList <Point2D.Double> myPolygon = new ArrayList<>();
         private SketchPad myPaper;
         private DrawingTool myPencil;
         // constructors
-        public IrregularPolygon() {
+        public N8() {
             myPaper = new SketchPad(500, 500);
             myPencil = new DrawingTool(myPaper);
             ArrayList <Point2D.Double> myPolygon;
